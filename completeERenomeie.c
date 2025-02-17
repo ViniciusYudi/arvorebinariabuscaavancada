@@ -100,7 +100,6 @@ PONT removerUmaOcorrencia(PONT raiz, int valor) {
                 while (temp->esq) temp = temp->esq;             // Enquanto o filho esquerdo do filho direito do nó a ser removido não for null, vai até o menor valor (máximo esquerda)
                 raiz->chave = temp->chave;                      // Acabando a verificação, a chave da raiz vira a chave do menor valor
                 raiz->contador = temp->contador;                // O contador da raiz vira o contador do menor valor
-                temp->contador = 1;                             // E então, o contador de temp vira 1.
                 raiz->dir = removerUmaOcorrencia(raiz->dir, temp->chave); // Por fim, recursivamente chamamos raiz->dir como parâmetro raiz novamente.
             }
         }
@@ -169,7 +168,7 @@ void imprimirIntervalo(PONT raiz, int min, int max) {
 
 PONT lowestCommonAncestor(PONT raiz, int val1, int val2) {
     if (raiz == NULL) return NULL;                                                                    // Por início, verifica se a raiz é nula
-    if (val1 > raiz->chave && val2 < raiz->chave) return lowestCommonAncestor(raiz->esq, val1, val2); // Se val1 é maior que a chave do elemento e val2 é MENOR do que a chave do mesmo, chama recursivamente a função para a esquerda
+    if (val1 < raiz->chave && val2 < raiz->chave) return lowestCommonAncestor(raiz->esq, val1, val2); // Se val1 é maior que a chave do elemento e val2 é MENOR do que a chave do mesmo, chama recursivamente a função para a esquerda
     if (val1 > raiz->chave && val2 > raiz->chave) return lowestCommonAncestor(raiz->dir, val1, val2); // Se val1 é maior que a chave do elemento e val2 é MAIOR do que a chave do mesmo, chama recursivamente a função para a direita
     return raiz;                                                                                      // Caso contrário, a raiz é o LCA.
 }
